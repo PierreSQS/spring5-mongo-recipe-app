@@ -56,4 +56,4 @@ jobs:
 
       - run:
           name: Send to CodeCov
-          command: bash < curl -Os https://uploader.codecov.io/latest/linux/codecov
+          command: curl -Os https://uploader.codecov.io/latest/linux/codecov
