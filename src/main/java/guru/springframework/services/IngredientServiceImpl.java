@@ -48,7 +48,7 @@ public class IngredientServiceImpl implements IngredientService {
 
         Optional<IngredientCommand> ingredientCommandOptional = recipe.getIngredients().stream()
                 .filter(ingredient -> ingredient.getId().equals(ingredientId))
-                .map( ingredient -> ingredientToIngredientCommand.convert(ingredient)).findFirst();
+                .map(ingredientToIngredientCommand::convert).findFirst();
 
         if(!ingredientCommandOptional.isPresent()){
             //todo impl error handling
@@ -87,7 +87,6 @@ public class IngredientServiceImpl implements IngredientService {
             } else {
                 //add new Ingredient
                 Ingredient ingredient = ingredientCommandToIngredient.convert(command);
-              //  ingredient.setRecipe(recipe);
                 recipe.addIngredient(ingredient);
             }
 
@@ -133,8 +132,7 @@ public class IngredientServiceImpl implements IngredientService {
             if(ingredientOptional.isPresent()){
                 log.debug("found Ingredient");
                 Ingredient ingredientToDelete = ingredientOptional.get();
-               // ingredientToDelete.setRecipe(null);
-                recipe.getIngredients().remove(ingredientOptional.get());
+                recipe.getIngredients().remove(ingredientToDelete);
                 recipeRepository.save(recipe);
             }
         } else {

@@ -39,7 +39,7 @@ public class RecipeController {
     public String newRecipe(Model model){
         model.addAttribute("recipe", new RecipeCommand());
 
-        return "recipe/recipeform";
+        return RECIPE_RECIPEFORM_URL;
     }
 
     @GetMapping("recipe/{id}/update")
@@ -53,9 +53,7 @@ public class RecipeController {
 
         if(bindingResult.hasErrors()){
 
-            bindingResult.getAllErrors().forEach(objectError -> {
-                log.debug(objectError.toString());
-            });
+            bindingResult.getAllErrors().forEach(objectError -> log.debug(objectError.toString()));
 
             return RECIPE_RECIPEFORM_URL;
         }
